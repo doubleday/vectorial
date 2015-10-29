@@ -127,9 +127,6 @@ vectorial_inline simd4f simd4f_madd(simd4f m1, simd4f m2, simd4f a) {
     return simd4f_add( simd4f_mul(m1, m2), a );
 }
 
-
-
-
 vectorial_inline simd4f simd4f_reciprocal(simd4f v) { 
     simd4f s = _mm_rcp_ps(v); 
     const simd4f two = simd4f_create(2.0f, 2.0f, 2.0f, 2.0f);
@@ -154,6 +151,15 @@ vectorial_inline float simd4f_get_x(simd4f s) { _simd4f_union u={s}; return u.f[
 vectorial_inline float simd4f_get_y(simd4f s) { _simd4f_union u={s}; return u.f[1]; }
 vectorial_inline float simd4f_get_z(simd4f s) { _simd4f_union u={s}; return u.f[2]; }
 vectorial_inline float simd4f_get_w(simd4f s) { _simd4f_union u={s}; return u.f[3]; }
+
+vectorial_inline uint32_t simd4f_get_xi(simd4f s) { _simd4f_union u={s}; return u.ui[0]; }
+vectorial_inline uint32_t simd4f_get_yi(simd4f s) { _simd4f_union u={s}; return u.ui[1]; }
+vectorial_inline uint32_t simd4f_get_zi(simd4f s) { _simd4f_union u={s}; return u.ui[2]; }
+vectorial_inline uint32_t simd4f_get_wi(simd4f s) { _simd4f_union u={s}; return u.ui[3]; }
+
+vectorial_inline float simd4f_get(simd4f s, size_t i) { _simd4f_union u={s}; return u.ui[i]; }
+vectorial_inline uint32_t simd4f_geti(simd4f s, size_t i) { _simd4f_union u={s}; return u.ui[i]; }
+
 
 vectorial_inline simd4f simd4f_dot3(simd4f lhs,simd4f rhs) {
 #if defined(VECTORIAL_USE_SSE4_1)
@@ -226,6 +232,21 @@ vectorial_inline simd4f simd4f_max(simd4f a, simd4f b) {
     return _mm_max_ps( a, b ); 
 }
 
+vectorial_inline simd4f simd4f_gt(simd4f a, simd4f b) {
+    return _mm_cmpgt_ps( a, b );
+}
+
+vectorial_inline simd4f simd4f_lt(simd4f a, simd4f b) {
+    return _mm_cmplt_ps( a, b );
+}
+
+vectorial_inline simd4f simd4f_and(simd4f a, simd4f mask) {
+    return _mm_and_ps(a, mask);
+}
+
+vectorial_inline simd4f simd4f_andnot(simd4f a, simd4f mask) {
+    return _mm_andnot_ps(a, mask);
+}
 
 
 #ifdef __cplusplus

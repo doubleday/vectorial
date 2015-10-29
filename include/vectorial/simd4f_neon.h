@@ -271,6 +271,21 @@ vectorial_inline simd4f simd4f_max(simd4f a, simd4f b) {
     return vmaxq_f32( a, b ); 
 }
 
+vectorial_inline simd4f simd4f_gt(simd4f a, simd4f b) {
+    return vcgtq_f32( a, b );
+}
+
+vectorial_inline simd4f simd4f_lt(simd4f a, simd4f b) {
+    return vcltq_f32( a, b );
+}
+
+vectorial_inline simd4f simd4f_and(simd4f a, simd4f mask) {
+    return vandq_u32(a, mask);
+}
+
+vectorial_inline simd4f simd4f_andnot(simd4f a, simd4f mask) {
+    return vbicq_u32(a, mask);
+}
 
 #ifdef __cplusplus
 }
